@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Module-13</title>
 
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -13,6 +17,29 @@
       <h1>Aleksey Grygorenko <br />goit-js-hw-13-image-finder</h1>
     </article>
 
+    <form class="search-form" id="search-form">
+      <input
+        class="input"
+        type="text"
+        name="query"
+        autocomplete="off"
+        placeholder="Search images..."
+      />
+    </form>
 
+    <div class="container">
+      <ul class="gallery">
+        <!-- Список <li> с карточками изображений -->
+      </ul>
+
+      <button class="btn-more disabled" type="button">
+        Load More
+        <div class="loader disabled">
+          <div class="inner one"></div>
+          <div class="inner two"></div>
+          <div class="inner three"></div>
+        </div>
+      </button>
+    </div>
   </body>
 </html>
