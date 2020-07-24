@@ -14,7 +14,7 @@ body {
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; */
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Kalam', cursive;
 
   /*
    * CSS image reference example.
@@ -33,10 +33,12 @@ body {
   margin: 0 auto;
   text-align: center;
   padding: 5px;
-  border-radius: 4px;
+  border-radius: 8px;
   border: 1px solid rgba(68, 72, 76, 0.884);
+  font-family: 'Kalam', cursive;
 
   &::placeholder {
+    font-family: 'Kalam', cursive;
     color: rgba(68, 72, 76, 0.884);
   }
 }
@@ -88,11 +90,15 @@ img {
 .btn-more {
   display: flex;
   align-items: center;
-  margin: 0 auto;
-  text-align: left;
+  justify-content: center;
   padding: 10px 10px;
-  background-color: #f5f5f5;
-  border: none;
+  min-height: 40px;
+  min-width: 125px;
+  text-align: left;
+  font-family: 'Kalam', cursive;
+  background-color: #282c35;
+  border: 3px solid transparent;
+  color: #f5f5f5;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
   font-weight: 600;
@@ -101,9 +107,28 @@ img {
   transition: all 0.2s linear;
 
   &:hover {
-    background-color: rgb(47, 38, 177);
+    border: 3px solid rgb(165, 168, 116);
+    border-radius: 5px;
+    // background-color: rgb(81, 74, 179);
     color: #f5f5f5;
   }
+}
+
+.button-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox {
+  position: fixed;
+  left: 25px;
+  bottom: 20px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #f5f5f5c4;
+  margin-right: 20px;
+  font-weight: 600;
 }
 
 .disabled {

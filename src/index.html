@@ -7,6 +7,11 @@
     <title>Module-13</title>
 
     <link
+      href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
@@ -24,6 +29,7 @@
         name="query"
         autocomplete="off"
         placeholder="Search images..."
+        autofocus
       />
     </form>
 
@@ -32,14 +38,22 @@
         <!-- Список <li> с карточками изображений -->
       </ul>
 
-      <button class="btn-more disabled" type="button">
-        Load More
-        <div class="loader disabled">
-          <div class="inner one"></div>
-          <div class="inner two"></div>
-          <div class="inner three"></div>
-        </div>
-      </button>
+      <div class="button-box disabled">
+        <label class="checkbox" for="scroll-loader">
+          <span>Active scroll auto-load</span>
+          <input type="checkbox" name="scroll-loader" id="scroll-loader" />
+        </label>
+
+        <button class="btn-more" type="button">
+          <span>Load More</span>
+          <div class="loader disabled">
+            <div class="inner one"></div>
+            <div class="inner two"></div>
+            <div class="inner three"></div>
+          </div>
+        </button>
+      </div>
     </div>
+    <ul class="pagination-count"></ul>
   </body>
 </html>
