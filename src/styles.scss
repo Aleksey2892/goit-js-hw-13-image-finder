@@ -61,7 +61,7 @@ img {
 .card {
   padding: 10px;
   width: 320px;
-  background-color: #f5f5f5;
+  background-color: rgba(196, 192, 192, 0.5);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
   &:not(:nth-last-child(-n + 3)) {
@@ -114,6 +114,12 @@ img {
   }
 }
 
+.btn-more.transparent {
+  background-color: transparent;
+  box-shadow: none;
+  color: black;
+}
+
 .button-box {
   display: flex;
   align-items: center;
@@ -131,6 +137,33 @@ img {
   font-weight: 600;
 }
 
+.pagination-count {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+
+  & li {
+    margin-right: 5px;
+    border-radius: 10px;
+    transition: all linear 0.3s;
+
+    &:hover,
+    &.active {
+      background-color: #282c35;
+    }
+    &:hover a,
+    &.active a {
+      color: #f5f5f5;
+    }
+    & a {
+      display: block;
+      padding: 4px;
+      color: #282c35;
+      text-decoration: none;
+    }
+  }
+}
 .disabled {
   display: none;
 }
