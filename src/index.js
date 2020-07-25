@@ -7,13 +7,16 @@ import iObserver from './js/observer';
 import notification from 'toastr';
 import './js/toastrSetting';
 import 'toastr/build/toastr.css';
-import { checkTotalItems, pageNumberCounter } from './js/pagination';
-// import pageNumbers from './js/pagination';
+import {
+  checkTotalItems,
+  pageNumberCounter,
+  nextActiveLink,
+} from './js/pagination';
+import './js/lightbox';
 // import $ from 'jquery';
 
 // LISTENERS
 refs.form.addEventListener('submit', formHandler);
-refs.checkBox.addEventListener('click', isChecked);
 
 // FUNCTIONS
 export let search = '';
@@ -40,25 +43,26 @@ function formHandler() {
           'Ничего не найдено',
         );
         refs.btnMore.removeEventListener('click', loadMoreData);
+        refs.checkBox.removeEventListener('click', isChecked);
       } else {
         notification['success'](
           `По вашему запросу найдено ${res.data.total} изображений`,
           'Запрос выполнен',
         );
         refs.spinner.classList.add('disabled');
-        refs.btnMore.querySelector('span').textContent = 'Load More';
         renderCards(res.data.hits);
+        refs.checkBox.addEventListener('click', isChecked);
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      notification['error'](`Ошибка: "${err}"`, 'Что-то пошло не так');
+    })
     .finally(() => {
       refs.spinner.classList.add('disabled');
       refs.input.value = '';
-      // console.log(search);
     });
 }
 
-// убрать потом экспорт
 export function renderCards(data) {
   refs.gallery.insertAdjacentHTML('beforeend', tempCard(data));
 
@@ -67,7 +71,6 @@ export function renderCards(data) {
 }
 
 export function loadMoreData() {
-  // isChecked();
   refs.btnMore.setAttribute('disabled', true);
   refs.spinner.classList.remove('disabled');
   refs.btnMore.querySelector('span').textContent = '';
@@ -75,20 +78,19 @@ export function loadMoreData() {
   fetchImages(search)
     .then(data => {
       refs.spinner.classList.add('disabled');
-      refs.btnMore.querySelector('span').textContent = 'Load More';
       renderCards(data.data.hits);
+      nextActiveLink();
     })
     .finally(() => {
       if (!refs.checkBox.checked) refs.btnMore.removeAttribute('disabled');
+      refs.btnMore.querySelector('span').textContent = 'Load More...';
     })
     .catch(data => console.log(data));
 }
 
 function isChecked() {
   if (refs.checkBox.checked) {
-    refs.btnMore.classList.add('transparent');
     refs.btnMore.setAttribute('disabled', true);
-    // refs.btnMore.querySelector('span').textContent = 'Loading';
     iObserver.observe(refs.btnMore);
   } else {
     iObserver.disconnect();

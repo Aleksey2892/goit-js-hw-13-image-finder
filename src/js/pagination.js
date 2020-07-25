@@ -44,21 +44,29 @@ function render(url) {
 }
 
 function fetchPagination(event) {
-  console.log(
-    event.target.parentElement.previousElementSibling.previousElementSibling,
-  );
+  if (event.target.nodeName !== 'A') return;
+
   refs.pagesCounter.querySelector('li.active').classList.remove('active');
   event.target.parentElement.classList.add('active');
   const num = event.target.dataset.num;
 
   return axios
     .get(
-      `?image_type=photo&orientation=horizontal&q=${search}&page=${pageNumberCounter.pageNum}&per_page=12&key=${myApiKey}`,
+      `?image_type=photo&orientation=horizontal&q=${search}&page=${num}&per_page=12&key=${myApiKey}`,
     )
     .then(res => {
-      console.log(res.data.hits);
+      // console.log(res.data.hits);
       refs.gallery.innerHTML = '';
       renderCards(res.data.hits);
     })
     .catch(err => console.log(err));
+}
+
+export function nextActiveLink() {
+  const activeLink = refs.pagesCounter.querySelector('.active');
+
+  if (activeLink.nextElementSibling === null) return;
+
+  activeLink.nextElementSibling.classList.add('active');
+  activeLink.classList.remove('active');
 }
