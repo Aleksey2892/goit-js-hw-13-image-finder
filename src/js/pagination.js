@@ -2,7 +2,6 @@ import axios from 'axios';
 import { myApiKey } from './apiService';
 
 import { search, renderCards } from '../index';
-// import tempCard from '../templates/tempCard.hbs';
 import refs from './refs';
 
 /*
@@ -29,8 +28,8 @@ export function checkTotalItems(totalItems) {
 export const pageNumberCounter = {
   pageNum: 0,
 };
-
 // let num = 0;
+
 function render(url) {
   pageNumberCounter.pageNum += 1;
 
@@ -55,7 +54,6 @@ function fetchPagination(event) {
       `?image_type=photo&orientation=horizontal&q=${search}&page=${num}&per_page=12&key=${myApiKey}`,
     )
     .then(res => {
-      // console.log(res.data.hits);
       refs.gallery.innerHTML = '';
       renderCards(res.data.hits);
     })

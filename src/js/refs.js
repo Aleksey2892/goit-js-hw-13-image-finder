@@ -6,7 +6,7 @@ const refs = {
   btnBox: document.querySelector('.button-box'),
   spinner: document.querySelector('.loader'),
   checkBox: document.querySelector('[name="scroll-loader"]'),
-  pagesCounter: document.querySelector('.pagination-count'),
+  // pagesCounter: document.querySelector('.pagination-count'),
 };
 
 export default refs;

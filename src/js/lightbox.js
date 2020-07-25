@@ -1,11 +1,11 @@
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/src/styles/main.scss';
 import refs from './refs';
-import { options } from 'toastr';
 
 refs.gallery.addEventListener('click', showModal);
 
 function showModal() {
+  if (event.target.nodeName !== 'IMG') return;
   const largeImg = event.target.dataset.largeimg.substr(1);
 
   basicLightbox
