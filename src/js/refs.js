@@ -7,6 +7,8 @@ const refs = {
   spinner: document.querySelector('.loader'),
   checkBox: document.querySelector('[name="scroll-loader"]'),
   // pagesCounter: document.querySelector('.pagination-count'),
+
+  social: document.querySelector('stats-item'),
 };
 
 export default refs;

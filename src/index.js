@@ -8,7 +8,7 @@ import notification from 'toastr';
 import './js/toastrSetting';
 import 'toastr/build/toastr.css';
 import './js/lightbox';
-
+import './js/statistics';
 // LISTENERS
 refs.form.addEventListener('submit', formHandler);
 
@@ -52,6 +52,9 @@ function formHandler() {
         refs.spinner.classList.add('disabled');
         // render page
         renderCards(resData);
+
+        // add social listener
+        refs.social.addEventListener('click', fn);
 
         refs.checkBox.addEventListener('click', isChecked);
         refs.btnMore.addEventListener('click', loadMoreData);

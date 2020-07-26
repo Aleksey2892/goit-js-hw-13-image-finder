@@ -11,7 +11,10 @@ function fetchImages(search) {
     .get(
       `?image_type=photo&orientation=horizontal&q=${search}&page=${pageNumber}&per_page=12&key=${myApiKey}`,
     )
-    .then(res => res)
+    .then(res => {
+      console.log(res.data);
+      return res;
+    })
     .catch(err => {
       throw err;
     });

@@ -74,6 +74,10 @@ img {
     background-color: rgb(90, 88, 84);
     .stats-item {
       color: rgb(255, 251, 233);
+
+      &:hover {
+        color: rgb(201, 171, 0);
+      }
     }
   }
 
