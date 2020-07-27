@@ -8,7 +8,8 @@ import notification from 'toastr';
 import './js/toastrSetting';
 import 'toastr/build/toastr.css';
 import './js/lightbox';
-import './js/statistics';
+import fn from './js/statistics';
+
 // LISTENERS
 refs.form.addEventListener('submit', formHandler);
 
@@ -54,7 +55,11 @@ function formHandler() {
         renderCards(resData);
 
         // add social listener
-        refs.social.addEventListener('click', fn);
+        document.querySelector('.stats-item').addEventListener('click', fn);
+        //
+        refs.gallery.addEventListener('click', event => {
+          console.log(event.target);
+        });
 
         refs.checkBox.addEventListener('click', isChecked);
         refs.btnMore.addEventListener('click', loadMoreData);

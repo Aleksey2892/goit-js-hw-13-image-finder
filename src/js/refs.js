@@ -8,7 +8,7 @@ const refs = {
   checkBox: document.querySelector('[name="scroll-loader"]'),
   // pagesCounter: document.querySelector('.pagination-count'),
 
-  social: document.querySelector('stats-item'),
+  // social: document.querySelector('.photo-card'),
 };
 
 export default refs;
