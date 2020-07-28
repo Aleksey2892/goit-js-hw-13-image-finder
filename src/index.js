@@ -9,10 +9,11 @@ import './js/toastrSetting';
 import 'toastr/build/toastr.css';
 import './js/lightbox';
 import showModal from './js/lightbox';
-import statisticHandler from './js/statistics';
+import { statisticHandler, favorites } from './js/statistics';
 
 // LISTENERS
 refs.form.addEventListener('submit', formHandler);
+refs.btnFavorites.addEventListener('click', favoritesHandler);
 
 // FUNCTIONS
 export let search = '';
@@ -128,4 +129,15 @@ function galleryHandler(event) {
   if (event.target.parentElement.dataset.like === 'like') {
     statisticHandler(event);
   }
+}
+
+function favoritesHandler() {
+  renderCards(favorites);
+
+  const allLikesCards = document.querySelectorAll('[data-like="like"]');
+  console.log(allLikesCards);
+
+  allLikesCards.forEach(statLike => {
+    statLike.classList.add('like');
+  });
 }

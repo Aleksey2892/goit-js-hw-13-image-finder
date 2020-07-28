@@ -1,6 +1,7 @@
 import refs from './refs';
 import $ from 'jquery';
 import loadPage from './loadPage';
+import { renderCards } from '../index';
 
 function statisticHandler(event) {
   if (event.target.nodeName === 'SPAN' || event.target.nodeName === 'I') {
@@ -51,7 +52,8 @@ function createObj(elem) {
     '.photo-card',
   )[0].firstElementChild.dataset.largeimg;
 
-  favoriteItem.likes = elem.textContent;
+  const likesQuantity = Number(elem.textContent);
+  favoriteItem.likes = likesQuantity + 1;
 
   favoriteItem.views = $(elem).parents(
     '.stats',
@@ -78,18 +80,17 @@ function removeObj(arr, id) {
   return arr.filter(obj => obj.id !== id);
 }
 
-// let arr = [
-//   { id: 1, data: 'qwe', data2: 'qwe' },
-//   { id: 2, data: 'qwe', data2: 'qwe' },
-//   { id: 3, data: 'qwe', data2: 'qwe' },
-//   { id: 4, data: 'qwe', data2: 'qwe' },
-// ];
+export { statisticHandler, favorites };
 
-// function removeObj(arr) {
-//   return arr.filter(obj => obj.id !== 3);
-// }
+// const BtnFavorites = document.querySelector('.favorites');
+// console.log(BtnFavorites);
 
-// arr = removeObj(arr);
-// console.log(arr);
+// BtnFavorites.addEventListener('click', () => {
+//   renderCards(favorites);
 
-export default statisticHandler;
+//   const allLikesCards = document.querySelectorAll('[data-like="like"]');
+//   console.log(allLikesCards);
+//   allLikesCards.forEach(statLike => {
+//     statLike.classList.add('like');
+//   });
+// });
