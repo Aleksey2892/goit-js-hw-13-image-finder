@@ -8,7 +8,8 @@ import notification from 'toastr';
 import './js/toastrSetting';
 import 'toastr/build/toastr.css';
 import './js/lightbox';
-import fn from './js/statistics';
+import showModal from './js/lightbox';
+import statisticHandler from './js/statistics';
 
 // LISTENERS
 refs.form.addEventListener('submit', formHandler);
@@ -54,12 +55,8 @@ function formHandler() {
         // render page
         renderCards(resData);
 
-        // add social listener
-        document.querySelector('.stats-item').addEventListener('click', fn);
-        //
-        refs.gallery.addEventListener('click', event => {
-          console.log(event.target);
-        });
+        // gallery lisnener
+        refs.gallery.addEventListener('click', galleryHandler);
 
         refs.checkBox.addEventListener('click', isChecked);
         refs.btnMore.addEventListener('click', loadMoreData);
@@ -119,6 +116,16 @@ function clearPage() {
   refs.gallery.innerHTML = '';
   refs.btnBox.classList.add('disabled');
 
+  refs.btnMore.removeEventListener('click', galleryHandler);
+
   refs.btnMore.removeEventListener('click', loadMoreData);
   refs.checkBox.removeEventListener('click', isChecked);
+}
+
+function galleryHandler(event) {
+  showModal();
+
+  if (event.target.parentElement.dataset.like === 'like') {
+    statisticHandler(event);
+  }
 }

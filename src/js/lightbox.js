@@ -2,7 +2,7 @@ import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/src/styles/main.scss';
 import refs from './refs';
 
-refs.gallery.addEventListener('click', showModal);
+// refs.gallery.addEventListener('click', showModal);
 
 function showModal() {
   if (event.target.nodeName !== 'IMG') return;
@@ -17,3 +17,5 @@ function showModal() {
     )
     .show();
 }
+
+export default showModal;
