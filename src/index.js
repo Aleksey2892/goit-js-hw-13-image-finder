@@ -18,7 +18,7 @@ refs.btnFavorites.addEventListener('click', favoritesHandler);
 
 // FUNCTIONS
 export let search = '';
-const ids = [];
+const idForLike = [];
 
 function formHandler() {
   event.preventDefault();
@@ -61,7 +61,7 @@ function formHandler() {
         // render page
         renderCards(resData);
         searchId(res.data.hits);
-        testId(ids);
+        setLike(idForLike);
 
         // gallery lisnener
         refs.gallery.addEventListener('click', galleryHandler);
@@ -100,10 +100,11 @@ export function loadMoreData() {
   // from apiService
   fetchImages(search)
     .then(data => {
-      console.log(ids);
+      console.log(idForLike);
       refs.spinner.classList.add('disabled');
       renderCards(data.data.hits);
-      testId(ids);
+      searchId(data.data.hits);
+      setLike(idForLike);
     })
     .finally(() => {
       if (!refs.checkBox.checked) refs.btnMore.removeAttribute('disabled');
@@ -128,7 +129,6 @@ function isChecked() {
 function clearPage() {
   refs.gallery.innerHTML = '';
   refs.btnBox.classList.add('disabled');
-  // pageNumber.counter = 0;
 
   refs.btnMore.removeEventListener('click', galleryHandler);
 
@@ -178,16 +178,16 @@ function searchId(res) {
     el.id = String(el.id);
     favorites.forEach(el2 => {
       if (el.id === el2.id) {
-        ids.push(el.id);
-        console.log(ids);
+        idForLike.push(el.id);
+        console.log(idForLike);
       }
     });
   });
 }
 
-function testId(ids) {
+function setLike(idForLike) {
   try {
-    ids.forEach(id => {
+    idForLike.forEach(id => {
       const li = document.querySelector(`[data-id="${id}"]`);
       if (li === null) return;
       li.querySelector('[data-like="like"]').classList.add('like');
