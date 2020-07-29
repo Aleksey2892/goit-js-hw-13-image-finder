@@ -87,16 +87,3 @@ function removeObj(arr, id) {
 }
 
 export { statisticHandler, favorites };
-
-// const BtnFavorites = document.querySelector('.favorites');
-// console.log(BtnFavorites);
-
-// BtnFavorites.addEventListener('click', () => {
-//   renderCards(favorites);
-
-//   const allLikesCards = document.querySelectorAll('[data-like="like"]');
-//   console.log(allLikesCards);
-//   allLikesCards.forEach(statLike => {
-//     statLike.classList.add('like');
-//   });
-// });

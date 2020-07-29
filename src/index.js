@@ -1,5 +1,5 @@
 import './styles.scss';
-import fetchImages from './js/apiService';
+import { fetchImages, pageNumber } from './js/apiService';
 import tempCard from './templates/tempCard.hbs';
 import refs from './js/refs';
 import iObserver from './js/observer';
@@ -18,6 +18,7 @@ refs.btnFavorites.addEventListener('click', favoritesHandler);
 
 // FUNCTIONS
 export let search = '';
+const ids = [];
 
 function formHandler() {
   event.preventDefault();
@@ -33,10 +34,12 @@ function formHandler() {
 
   clearPage();
   search = refs.input.value;
+  pageNumber.counter = 0;
 
   // from apiService
   fetchImages(search)
     .then(res => {
+      // pageNumber.counter = 0;
       if (res.data.hits.length === 0) {
         notification['error'](
           'Попробуйте другой поисковой запрос',
@@ -57,6 +60,8 @@ function formHandler() {
         refs.spinner.classList.add('disabled');
         // render page
         renderCards(resData);
+        searchId(res.data.hits);
+        testId(ids);
 
         // gallery lisnener
         refs.gallery.addEventListener('click', galleryHandler);
@@ -95,8 +100,10 @@ export function loadMoreData() {
   // from apiService
   fetchImages(search)
     .then(data => {
+      console.log(ids);
       refs.spinner.classList.add('disabled');
       renderCards(data.data.hits);
+      testId(ids);
     })
     .finally(() => {
       if (!refs.checkBox.checked) refs.btnMore.removeAttribute('disabled');
@@ -121,6 +128,7 @@ function isChecked() {
 function clearPage() {
   refs.gallery.innerHTML = '';
   refs.btnBox.classList.add('disabled');
+  // pageNumber.counter = 0;
 
   refs.btnMore.removeEventListener('click', galleryHandler);
 
@@ -130,11 +138,6 @@ function clearPage() {
 
 function galleryHandler(event) {
   if (isActiveFavorites) {
-    // refs.btnMore.removeEventListener('click', loadMoreData);
-    // refs.checkBox.removeEventListener('click', isChecked);
-    // refs.btnMore.style = 'display: none';
-    // refs.checkBox.style = 'display: none';
-
     if (event.target.parentElement.classList.contains('like')) {
       if (favorites.length >= 1) {
         const li = $(event.target).parents('.card')[0];
@@ -168,4 +171,34 @@ function favoritesHandler(event) {
   allLikesCards.forEach(statLike => {
     statLike.classList.add('like');
   });
+}
+
+function searchId(res) {
+  res.forEach(el => {
+    el.id = String(el.id);
+    favorites.forEach(el2 => {
+      if (el.id === el2.id) {
+        ids.push(el.id);
+        console.log(ids);
+      }
+    });
+  });
+}
+
+function testId(ids) {
+  try {
+    ids.forEach(id => {
+      const li = document.querySelector(`[data-id="${id}"]`);
+      if (li === null) return;
+      li.querySelector('[data-like="like"]').classList.add('like');
+      const spanLikes = Number(
+        li.querySelector('[data-like="like"] > span').textContent,
+      );
+
+      const totalLikes = spanLikes + 1;
+      li.querySelector('[data-like="like"] > span').textContent = totalLikes;
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
