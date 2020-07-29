@@ -100,7 +100,6 @@ export function loadMoreData() {
   // from apiService
   fetchImages(search)
     .then(data => {
-      console.log(idForLike);
       refs.spinner.classList.add('disabled');
       renderCards(data.data.hits);
       searchId(data.data.hits);
@@ -110,7 +109,10 @@ export function loadMoreData() {
       if (!refs.checkBox.checked) refs.btnMore.removeAttribute('disabled');
       refs.btnMore.querySelector('span').textContent = 'Load More...';
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      notification['error'](`Ошибка: "${err}"`, 'Что-то пошло не так');
+    });
 }
 
 // auto-loading by scrolling
@@ -179,7 +181,6 @@ function searchId(res) {
     favorites.forEach(el2 => {
       if (el.id === el2.id) {
         idForLike.push(el.id);
-        console.log(idForLike);
       }
     });
   });
@@ -200,5 +201,6 @@ function setLike(idForLike) {
     });
   } catch (err) {
     console.log(err);
+    notification['error'](`Ошибка: "${err}"`, 'Что-то пошло не так');
   }
 }

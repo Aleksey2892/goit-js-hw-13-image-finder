@@ -10,13 +10,12 @@ const pageNumber = {
 
 function fetchImages(search) {
   pageNumber.counter += 1;
-  console.log(pageNumber.counter);
+
   return axios
     .get(
       `?image_type=photo&orientation=horizontal&q=${search}&page=${pageNumber.counter}&per_page=12&key=${myApiKey}`,
     )
     .then(res => {
-      console.log(res.data);
       return res;
     })
     .catch(err => {

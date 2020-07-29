@@ -37,7 +37,7 @@ function plusLike(elem) {
   } else {
     favorites = removeObj(favorites, id);
     refs.quantityLikes.textContent = favorites.length;
-    console.log(favorites);
+
     localStorage.setItem('favorites', JSON.stringify(favorites));
 
     elem.textContent = numberLikes - 1;
@@ -74,7 +74,6 @@ function createObj(elem) {
 
   favorites.push(favoriteItem);
 
-  console.log(favorites);
   localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
