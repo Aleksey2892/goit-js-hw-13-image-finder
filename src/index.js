@@ -10,6 +10,7 @@ import 'toastr/build/toastr.css';
 import './js/lightbox';
 import showModal from './js/lightbox';
 import { statisticHandler, favorites } from './js/statistics';
+import $ from 'jquery';
 
 // LISTENERS
 refs.form.addEventListener('submit', formHandler);
@@ -20,6 +21,7 @@ export let search = '';
 
 function formHandler() {
   event.preventDefault();
+  isActiveFavorites = false;
 
   if (refs.input.value === search) {
     notification['warning'](
@@ -61,6 +63,9 @@ function formHandler() {
 
         refs.checkBox.addEventListener('click', isChecked);
         refs.btnMore.addEventListener('click', loadMoreData);
+
+        refs.btnMore.style = 'display: flex';
+        refs.checkBoxLabel.style = 'display: block';
       }
     })
     .catch(err => {
@@ -124,6 +129,20 @@ function clearPage() {
 }
 
 function galleryHandler(event) {
+  if (isActiveFavorites) {
+    // refs.btnMore.removeEventListener('click', loadMoreData);
+    // refs.checkBox.removeEventListener('click', isChecked);
+    // refs.btnMore.style = 'display: none';
+    // refs.checkBox.style = 'display: none';
+
+    if (event.target.parentElement.classList.contains('like')) {
+      if (favorites.length >= 1) {
+        const li = $(event.target).parents('.card')[0];
+        li.style = 'display: none';
+      }
+    }
+  }
+
   showModal();
 
   if (event.target.parentElement.dataset.like === 'like') {
@@ -131,11 +150,20 @@ function galleryHandler(event) {
   }
 }
 
-function favoritesHandler() {
+let isActiveFavorites = false;
+
+function favoritesHandler(event) {
+  isActiveFavorites = true;
+  clearPage();
   renderCards(favorites);
 
+  refs.btnMore.removeEventListener('click', loadMoreData);
+  refs.checkBox.removeEventListener('click', isChecked);
+  refs.btnMore.style = 'display: none';
+  refs.checkBoxLabel.style = 'display: none';
+
+  refs.gallery.addEventListener('click', galleryHandler);
   const allLikesCards = document.querySelectorAll('[data-like="like"]');
-  console.log(allLikesCards);
 
   allLikesCards.forEach(statLike => {
     statLike.classList.add('like');

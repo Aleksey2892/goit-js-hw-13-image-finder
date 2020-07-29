@@ -6,7 +6,9 @@ const refs = {
   btnBox: document.querySelector('.button-box'),
   spinner: document.querySelector('.loader'),
   checkBox: document.querySelector('[name="scroll-loader"]'),
-  btnFavorites: document.querySelector('.favorites'),
+  checkBoxLabel: document.querySelector('label'),
+  btnFavorites: document.querySelector('.btn-favorites'),
+  quantityLikes: document.querySelector('.quantity-likes'),
 };
 
 export default refs;

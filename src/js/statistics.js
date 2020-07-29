@@ -21,6 +21,9 @@ function statisticHandler(event) {
 
 let favorites = [];
 if (loadPage()) favorites = loadPage(); // recovers data on reboot from localStorage
+if (favorites.length >= 1) {
+  refs.quantityLikes.textContent = favorites.length;
+}
 
 function plusLike(elem) {
   const id = $(elem).parents('.card')[0].dataset.id;
@@ -28,10 +31,12 @@ function plusLike(elem) {
 
   if (!checkId(id)) {
     createObj(elem);
+    refs.quantityLikes.textContent = favorites.length;
 
     elem.textContent = numberLikes + 1;
   } else {
     favorites = removeObj(favorites, id);
+    refs.quantityLikes.textContent = favorites.length;
     console.log(favorites);
     localStorage.setItem('favorites', JSON.stringify(favorites));
 
@@ -48,9 +53,9 @@ function createObj(elem) {
     .parents('.photo-card')[0]
     .firstElementChild.getAttribute('src');
 
-  favoriteItem.largeImageURL = $(elem).parents(
-    '.photo-card',
-  )[0].firstElementChild.dataset.largeimg;
+  favoriteItem.largeImageURL = $(elem)
+    .parents('.photo-card')[0]
+    .firstElementChild.dataset.largeimg.substr(1);
 
   const likesQuantity = Number(elem.textContent);
   favoriteItem.likes = likesQuantity + 1;
@@ -68,6 +73,7 @@ function createObj(elem) {
   )[0].children[3].lastElementChild.textContent;
 
   favorites.push(favoriteItem);
+
   console.log(favorites);
   localStorage.setItem('favorites', JSON.stringify(favorites));
 }
