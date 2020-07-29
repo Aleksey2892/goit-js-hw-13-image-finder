@@ -31,6 +31,10 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  @media screen and (max-width: 560px) {
+    flex-direction: column;
+  }
 }
 
 .btn-favorites {
@@ -61,6 +65,11 @@ body {
     background-color: rgb(90, 88, 84);
     color: rgb(255, 251, 233);
   }
+
+  @media screen and (max-width: 560px) {
+    order: 1;
+    margin-bottom: 20px;
+  }
 }
 
 // .material-icons {
@@ -87,6 +96,10 @@ img {
   height: 200px;
   display: block;
   object-fit: cover;
+
+  @media screen and (max-width: 360px) {
+    width: 280px;
+  }
 }
 
 .gallery {
@@ -132,6 +145,10 @@ img {
     &:not(:last-child) {
       margin-bottom: 20px;
     }
+  }
+
+  @media screen and (max-width: 360px) {
+    width: 300px;
   }
 }
 
@@ -190,6 +207,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 60px;
 }
 
 .checkbox {
